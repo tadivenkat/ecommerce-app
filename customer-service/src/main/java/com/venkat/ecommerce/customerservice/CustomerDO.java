@@ -1,24 +1,20 @@
-package com.venkat.ecommerce.productservice.dataobject;
-
-import java.math.BigDecimal;
+package com.venkat.ecommerce.customerservice;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Document(collection = "customers")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-@Document(collection = "products")
-public class ProductDO {
+public class CustomerDO {
     @Id
     private String id;
-    private String name;
-    private String description;
-    private BigDecimal price;
+    private String firstName;
+    private String lastName;
+    private String email;
 }
