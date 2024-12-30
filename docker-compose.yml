@@ -1,6 +1,18 @@
 services:
+  mongodb:
+    container_name: mongodb
+    image: mongo
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: venkat
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - ./data:/data/db
+
   postgresql:
-    container_name: order-service-postgresql
+    container_name: postgresql
     image: postgres
     environment:
       POSTGRES_USER: venkat
