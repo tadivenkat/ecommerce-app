@@ -13,6 +13,7 @@ public class ProductMapper {
                                         .name(productDTO.name())
                                         .description(productDTO.description())
                                         .price(productDTO.price())
+                                        .availableQuantity(productDTO.availableQuantity())
                                         .build();
         return productDO;
     }
@@ -22,7 +23,8 @@ public class ProductMapper {
                                         productDO.getId(), 
                                         productDO.getName(), 
                                         productDO.getDescription(), 
-                                        productDO.getPrice());
+                                        productDO.getPrice(), 
+                                        productDO.getAvailableQuantity());
         return productDTO;
     }
 }

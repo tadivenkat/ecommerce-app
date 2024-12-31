@@ -1,4 +1,4 @@
-package com.venkat.ecommerce.productservice.dto;
+package com.venkat.ecommerce.orderservice.dto;
 
 import java.math.BigDecimal;
 

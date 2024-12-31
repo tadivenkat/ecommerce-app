@@ -31,7 +31,7 @@ public class CustomerService {
     }
 
     public CustomerDTO getCustomer(String id) {
-        return customerMapper.map(customerRepository.findById(id).get());
+        return customerMapper.map(customerRepository.findById(id).orElseThrow(CustomerNotFoundException::new));
     }
 
     public void deleteCustomer(String id) {

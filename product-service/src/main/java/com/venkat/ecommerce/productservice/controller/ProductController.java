@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.http.HttpStatus;
 
 import com.venkat.ecommerce.productservice.dto.ProductDTO;
+import com.venkat.ecommerce.productservice.dto.OrderLineDTO;
 import com.venkat.ecommerce.productservice.service.ProductService;
 
 @RestController
@@ -64,5 +66,12 @@ public class ProductController {
     @ResponseStatus(HttpStatus.OK)
     public ResponseEntity<ProductDTO> getProduct(@PathVariable("id") String id) {
         return ResponseEntity.ok().body(productService.getProduct(id));    
+    }
+
+    @PutMapping("/purchase")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ProductDTO> purchaseProducts(@RequestBody List<OrderLineDTO> productSaleDTOs) {
+        List<ProductDTO> updatedProductDTOs = productService.purchaseProducts(productSaleDTOs);
+        return updatedProductDTOs;
     }
 }
