@@ -21,5 +21,5 @@ public class ProductDO {
     private String name;
     private String description;
     private BigDecimal price;
-    private double availableQuantity;
+    private Double availableQuantity;
 }

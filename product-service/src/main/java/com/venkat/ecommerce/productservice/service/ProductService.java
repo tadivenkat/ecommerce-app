@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -22,15 +23,18 @@ public class ProductService {
 
     private final ProductMapper productMapper;
     private final ProductRepository productRepository;
+    private final KafkaTemplate<String, ProductDTO> kafkaTemplate;
 
-    public ProductService(ProductMapper productMapper, ProductRepository productRepository) {
+    public ProductService(ProductMapper productMapper, ProductRepository productRepository, KafkaTemplate<String, ProductDTO> kafkaTemplate) {
         this.productMapper = productMapper;
         this.productRepository = productRepository;
+        this.kafkaTemplate = kafkaTemplate;
     }
 
     public ProductDTO createProduct(ProductDTO productDTO) {
         ProductDTO product = productMapper.map(productRepository.save(productMapper.map(productDTO)));
-        logger.info("Product created with id:{}", productDTO.id());
+        kafkaTemplate.send("new-products", product.id(), product);
+        logger.info("Product created with id:{}", product.id());
         return product;
     }
 
